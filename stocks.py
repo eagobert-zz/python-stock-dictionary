@@ -19,6 +19,24 @@ for purchase in stockPurch:
     price = purchase[1] * purchase[3]
     print ('Stock Purchase:', stockDict[purchase[0]] + ', ' + str(price) )
 
-#
 
 # Create a second purchase summary that which accumulates total investment by ticker symbol. In the above sample data, there are two blocks of GE. These can easily be combined by creating a dict where the key is the ticker and the value is the list of blocks purchased. The program makes one pass through the data to create the dict. A pass through the dict can then create a report showing each ticker symbol and all blocks of stock.
+
+#Step 1: Create a dictionary
+purchase_summary = {}
+
+#Step 2:  Loop thru the list of tuples
+for purchase in stockPurch:
+
+    #if ticker exists in purchase_summary dictionary
+    if purchase[0] in purchase_summary:
+
+        #append the purchase to the ticker key
+        purchase_summary[purchase[0]] += [(purchase[1], purchase[2], purchase[3])]
+
+    #if ticker key doesn't exist,
+    else:
+        #add the new ticker and the associated purchases
+        purchase_summary[purchase[0]] = [(purchase[1], purchase[2], purchase[3])]
+
+print(purchase_summary)
